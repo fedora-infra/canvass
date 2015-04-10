@@ -24,11 +24,12 @@
                   <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="divider-vertical"></li>
-                      <li class=""><a href="/">Home</a></li>
+                      <li class="{% if thispage == "home"%}active{% endif %}"><a href="/">Home</a></li>
                     </ul>
                     <ul class="nav navbar-nav pull-right">
                     {% if session['logged'] %}
-                        <li><a href="/admin">Admin</a></li>
+                        <li class="{% if thispage == "admin"%}active{% endif %}"><a href="/admin">Admin</a></li>
+                        <li><a href="/logout">Log Out</a></li>
                     {% else %}
                         <li><a href="/auth">Log In</a></li>
                     {% endif %}

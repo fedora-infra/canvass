@@ -60,7 +60,7 @@ def admin_panel():
         if admin_group in flask.g.fas_user.groups:
             is_admin = True
     if is_admin == True:
-        return "You are an admin!"
+        return render_template("admin.html")
     else:
         render_template('error.html', error="Your account does not have access to this resource.")
 
