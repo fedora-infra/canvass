@@ -11,7 +11,9 @@ class BaseModel(Model):
         database = db
 
 class Record(BaseModel):
-    location = CharField() # coords
+    country = CharField()
+    timezone = CharField()
+
     ip = TextField() # ip
     total_storage = DecimalField() # GiB
     total_memory = IntegerField() # kB

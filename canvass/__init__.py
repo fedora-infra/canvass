@@ -69,12 +69,16 @@ def api_submit_record():
     if request.method != 'POST':
         return "<h1>400 Bad Request</h1><br /><p>GET is not supported</p>"
     else:
-        ip = request.remote_addr
+        # ip = request.remote_addr
 
-        location = "0"; # geolocate
-        
+        country = "0"; # geolocate
+        timezone = "0" # get TZ
+
         fields = {}
-        fields["ip"] = ip
+        # fields["ip"] = ip
+        fields["country"] = request.form["country"]
+        fields["timezone"] = request.form["timezone"]
+
         fields["total_storage"] = request.form['total_storage'] # GiB
         fields["total_memory"] = round(int(request.form['total_memory']), 0) # kB
         fields["linux_distro"] = request.form['linux_distro'] # e.g Fedora
@@ -87,9 +91,9 @@ def api_submit_record():
         fields["num_cpus"] = request.form['num_cpus'] # e.g 4
 
         print fields["total_memory"]
-    #    try:
-        insert_query = peewee.InsertQuery(Record, fields)
-        insert_query.execute()
-    #    except:
-        # return "500 Internal Server Error"
+        try:
+            insert_query = peewee.InsertQuery(Record, fields)
+            insert_query.execute()
+        except:
+            return "500 Internal Server Error"
         return "200 OK"
