@@ -95,8 +95,9 @@ print(
     linux_distro_name,
     cpus,
     machine_arch,
-    system_uname,
-    processor_arch
+    processor_arch,
+    num_cpus,
+    kernel_release
 )
 
 # Upload data
