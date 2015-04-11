@@ -12,8 +12,9 @@ class BaseModel(Model):
 
 class Record(BaseModel):
     location = CharField() # coords
+    ip = TextField() # ip
     total_storage = DecimalField() # GiB
-    total_memory = DecialField() # kB
+    total_memory = IntegerField() # kB
     linux_distro = CharField() # e.g Fedora
     linux_distro_version = CharField() # e.g 21
     linux_distro_name = CharField() # e.g Twenty One

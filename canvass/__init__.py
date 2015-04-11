@@ -70,4 +70,26 @@ def api_submit_record():
         return "<h1>400 Bad Request</h1><br /><p>GET is not supported</p>"
     else:
         ip = request.remote_addr
-        devices = request.form['devices']
+
+        location = "0"; # geolocate
+        
+        fields = {}
+        fields["ip"] = ip
+        fields["total_storage"] = request.form['total_storage'] # GiB
+        fields["total_memory"] = round(int(request.form['total_memory']), 0) # kB
+        fields["linux_distro"] = request.form['linux_distro'] # e.g Fedora
+        fields["linux_distro_version"] = request.form['linux_distro_version'] # e.g 21
+        fields["linux_distro_name"] = request.form['linux_distro_name'] # e.g Twenty One
+        fields["kernel_release"] = request.form['kernel_release'] # e.g 3.18.3-201.fc21.x86_64
+        fields["cpus"] = request.form['cpus'] # e.g [' Intel(R) Core(TM) i5-4200U CPU @ 1.60GHz', ' Intel(R) Core(TM) i5-4200U CPU @ 1.60GHz']
+        fields["machine_arch"] = request.form['machine_arch'] # e.g x86_64
+        fields["processor_arch"] = request.form['processor_arch'] # e.g x86_64
+        fields["num_cpus"] = request.form['num_cpus'] # e.g 4
+
+        print fields["total_memory"]
+    #    try:
+        insert_query = peewee.InsertQuery(Record, fields)
+        insert_query.execute()
+    #    except:
+        # return "500 Internal Server Error"
+        return "200 OK"
