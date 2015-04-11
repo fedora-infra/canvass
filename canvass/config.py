@@ -23,7 +23,7 @@ enable_debug = True # Debug/dev mode
 dbhost = "localhost" # Database Host
 dbuser = "root" # Database User
 dbpass = "root" # Database Password
-dbname = "spectre" # Database Name
+dbname = "canvass" # Database Name
 
 app_host = "localhost"
 app_port = 5000

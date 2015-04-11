@@ -66,4 +66,8 @@ def admin_panel():
 
 @app.route('/api/submit_record', methods=['GET', 'POST'])
 def api_submit_record():
-    pass
+    if request.method != 'POST':
+        return "<h1>400 Bad Request</h1><br /><p>GET is not supported</p>"
+    else:
+        ip = request.remote_addr
+        devices = request.form['devices']
