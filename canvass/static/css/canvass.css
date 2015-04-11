@@ -6,6 +6,7 @@ body {
   body {
     padding-top: 60px;
   }
+
 }
 
 /* Bootstrap Theming */
@@ -95,4 +96,15 @@ footer {
 footer > p {
     margin-right: 0px;
     margin-bottom: 10px;
+}
+.tagline {
+    margin-left: 30%;
+    margin-right: 30%;
+}
+@media (max-width: 979px) {
+  .tagline {
+      margin-left: 10%;
+      margin-right: 10%;
+  }
+
 }
