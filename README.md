@@ -11,5 +11,5 @@ needed `pip` dependencies:
 
  - Python 2
  - `pip` dependencies: `pip install -r requirements.txt`
- - PostgreSQL
+ - PostgreSQL or MySQL
  - `virtualenv` (optional but recommended)
