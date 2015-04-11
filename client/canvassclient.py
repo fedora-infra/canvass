@@ -19,8 +19,12 @@ Canvass Main Client
 '''
 
 from __future__ import print_function
-import platform, glob, re, os
+import platform, glob, re, os, urllib, urllib2
 from collections import OrderedDict
+
+# Config
+
+data_send_endpoint = "http://localhost:5000/api/submit_record"
 
 # System Info
 
@@ -61,7 +65,8 @@ with open('/proc/meminfo') as f:
         meminfo[line.split(':')[0]] = line.split(':')[1].strip()
 
 # Total Memory in kB
-total_memory = meminfo['MemTotal']
+total_mem_int = re.match("([0-9]*).*?", meminfo["MemTotal"])
+total_memory = total_mem_int.group(0)
 
 '''
 Storage
@@ -86,7 +91,7 @@ for device in glob.glob('/sys/block/*'):
 for sto_device in storage_devices:
     # size is in GiB
     total_storage += sto_device['size']
-
+'''
 print(
     total_storage,
     total_memory,
@@ -99,5 +104,31 @@ print(
     num_cpus,
     kernel_release
 )
+'''
 
-# Upload data
+'''
+* Upload Data *
+urllib is used to reduce external dependencies
+'''
+values = {
+    "total_storage": total_storage,
+    "total_memory": total_memory,
+    "linux_distro": linux_distro,
+    "linux_distro_version": linux_distro_version,
+    "linux_distro_name": linux_distro_name,
+    "cpus": cpus,
+    "machine_arch": machine_arch,
+    "processor_arch": processor_arch,
+    "num_cpus": num_cpus,
+    "kernel_release": kernel_release
+}
+try:
+    data = urllib.urlencode(values)
+    req = urllib2.Request(data_send_endpoint, data)
+    response = urllib2.urlopen(req).read()
+    if response == "200 OK":
+        print("Success")
+    else:
+        print("Sent, but did not receive 200")
+except:
+    print("Could not send data")
