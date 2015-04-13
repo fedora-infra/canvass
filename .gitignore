@@ -55,3 +55,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Dynamically Generated Files
+canvass/templates/static_stat.html

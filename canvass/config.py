@@ -25,6 +25,8 @@ dbuser = "root" # Database User
 dbpass = "root" # Database Password
 dbname = "canvass" # Database Name
 
+distro = "Fedora"
+
 app_host = "localhost"
 app_port = 5000
 

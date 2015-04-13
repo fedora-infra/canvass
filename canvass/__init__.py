@@ -64,6 +64,13 @@ def admin_panel():
     else:
         render_template('error.html', error="Your account does not have access to this resource.")
 
+@app.route('/stats/overview', methods=['GET'])
+def stats_overview():
+    # Send statically generated statistic files
+    # Stats page needs to be generated using
+    # generate_stats script. Set on cron cycle
+    return render_template("static_stat.html")
+
 @app.route('/api/submit_record', methods=['GET', 'POST'])
 def api_submit_record():
     if request.method != 'POST':

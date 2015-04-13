@@ -1,6 +1,3 @@
-{% extends "base.html" %}
-
-{% block body %}
 <script src="/static/js/highmaps.js"></script>
 <script src="/static/js/highmaps_data.js"></script>
 <script src="/static/js/highmaps_world.js"></script>
@@ -9,7 +6,7 @@
         data = ([
             {% for country in countries %}
                 {
-                    code: {{ country.country_code }},
+                    code: "{{ country.country_code }}",
                     z: {{ country.user_num }}
                 },
             {% endfor %}
@@ -64,7 +61,7 @@
                 minSize: 4,
                 maxSize: '12%',
                 tooltip: {
-                    pointFormat: '{point.code}: {point.z} {{ units | default("thousands") }}'
+                    pointFormat: '{point.code}: {point.z} {{ units | default("users") }}'
                 }
             }]
         });
@@ -73,5 +70,3 @@
     </script>
 
 <div id="container" style="height: 500px; min-width: 310px; max-width: 800px; margin: 0 auto"></div>
-
-{% endblock %}
