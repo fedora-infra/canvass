@@ -1,4 +1,27 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script>
+var upr_data = [
+    {% for release in releases %}
+        {
+            value: {{ release.count }},
+            color: "{{ release.rcolor }}",
+            highlight: "{{ release.rcolor }}",
+            label: "Release {{ release.kname }}"
+        },
+    {% endfor %}
+];
+var uma_data = [
+    {% for arch in archs %}
+        {
+            value: {{ arch.count }},
+            color: "{{ arch.rcolor }}",
+            highlight: "{{ arch.rcolor }}",
+            label: "Arch {{ arch.kname }}"
+        },
+    {% endfor %}
+];
+
+</script>
 <script src="/static/js/stat_overview.js"></script>
 
 <h1>Stats Overview</h1>
@@ -14,16 +37,18 @@
     <b>a. Per Release</b>
     <br />
     <div><canvas id="usersPerRelease" width="200" height="200"></canvas></div>
+    <div id="upr_legend"></div>
 </div>
 
 <div class="col-md-4">
-    <b>b. Per Release</b>
+    <b>b. Per Machine Arch</b>
     <br />
-    <div><canvas id="usersPerRelease" width="200" height="200"></canvas></div>
+    <div><canvas id="usersPerArch" width="200" height="200"></canvas></div>
+    <div id="uma_legend"></div>
 </div>
 
 <div class="col-md-4">
-    <b>c. Per Release</b>
+    <b>c. Per Lorem Ipsum</b>
     <br />
     <div><canvas id="usersPerRelease" width="200" height="200"></canvas></div>
 </div>

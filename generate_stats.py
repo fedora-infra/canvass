@@ -19,12 +19,14 @@ Set on a daily cronjob to keep up to date
 '''
 from jinja2 import Environment, PackageLoader
 from canvass.database import *
-import time, peewee, canvass.config
-
-
+import time, peewee, canvass.config, gutil
 
 countries = []
-country_user_count = dict()
+
+counts = dict()
+counts["release_user"] = dict()
+counts["country_user"] = dict()
+counts["arch_user"] = dict()
 
 
 distro_records = Record.select().where(Record.linux_distro == canvass.config.distro)
@@ -33,23 +35,35 @@ for record in distro_records:
     Per-Release
     Distribution User Map
     '''
-    if record.country not in country_user_count.keys():
-        country_user_count[record.country] = 1
-    else:
-        country_user_count[record.country] += 1
+    record_counts = [
+        {"db_name": "country", "count_name": "country_user"},
+        {"db_name": "linux_distro_version", "count_name": "release_user"},
+        {"db_name": "machine_arch", "count_name": "arch_user"}
+    ]
+    for count in record_counts:
+        if getattr(record, count["db_name"]) not in counts[count["count_name"]].keys():
+            counts[count["count_name"]][getattr(record, count["db_name"])] = 1
+        else:
+            counts[count["count_name"]][getattr(record, count["db_name"])] += 1
 
-for country, count in country_user_count.iteritems():
+
+for country, count in counts["country_user"].iteritems():
     countries.append({
         "country_code": country,
         "user_num": count
     })
+
+releases = gutil.gkp(counts["release_user"])
+archs = gutil.gkp(counts["arch_user"])
+
 
 env = Environment(loader=PackageLoader('canvass', 'templates'))
 generated_date = (time.strftime("%d/%m/%Y at %I:%M"))
 template = env.get_template('stats_overview.html')
 compiled = template.render(
     generated_date=generated_date, countries=countries,
-    distro=canvass.config.distro
+    distro=canvass.config.distro, releases=releases,
+    archs=archs
 )
 static_stat_template = "{}{}{}".format(
     "{% extends \"base.html\" %}\n\n{% block body %}\n",
