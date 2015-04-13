@@ -48,7 +48,8 @@ env = Environment(loader=PackageLoader('canvass', 'templates'))
 generated_date = (time.strftime("%d/%m/%Y at %I:%M"))
 template = env.get_template('stats_overview.html')
 compiled = template.render(
-    generated_date=generated_date, countries=countries
+    generated_date=generated_date, countries=countries,
+    distro=canvass.config.distro
 )
 static_stat_template = "{}{}{}".format(
     "{% extends \"base.html\" %}\n\n{% block body %}\n",

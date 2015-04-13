@@ -1,4 +1,29 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script src="/static/js/stat_overview.js"></script>
+
 <h1>Stats Overview</h1>
 <p class="text-muted">Generated at {{ generated_date }}</p>
 
+<h3>I. Geography</h3>
 {% include 'map_stats.html' with context %}
+
+<h3>II. User Share</h3>
+<p>Total {{ distro }} users</p>
+
+<div class="col-md-4">
+    <b>a. Per Release</b>
+    <br />
+    <div><canvas id="usersPerRelease" width="200" height="200"></canvas></div>
+</div>
+
+<div class="col-md-4">
+    <b>b. Per Release</b>
+    <br />
+    <div><canvas id="usersPerRelease" width="200" height="200"></canvas></div>
+</div>
+
+<div class="col-md-4">
+    <b>c. Per Release</b>
+    <br />
+    <div><canvas id="usersPerRelease" width="200" height="200"></canvas></div>
+</div>

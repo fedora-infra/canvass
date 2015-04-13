@@ -90,7 +90,15 @@ body {
 footer {
     position: absolute;
     margin-top: 10px;
+    height: 30px;
     bottom: 0px;
+}
+.wrapper {
+    min-height: 100%;
+    position: relative;
+}
+.central-content {
+    padding-bottom: 30px;
 }
 
 footer > p {
