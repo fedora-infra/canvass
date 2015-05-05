@@ -28,7 +28,7 @@ def get_sysinfo():
 def submit_sysinfo():
     pass
 
-print( get_sysinfo() )
+# print( get_sysinfo() )
 
 
 # Config

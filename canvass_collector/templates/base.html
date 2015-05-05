@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>{% block title %}Fedora Canvass{% endblock %}</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/journal/bootstrap.min.css" rel="stylesheet">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/static/css/canvass.css" rel="stylesheet" type="text/css" />
+        {% block head %}
+        <!-- Additional head tags go here -->
+        {% endblock %}
+    </head>
+    <body>
+            <div class="container central-content">
+                {% block body %}
+                {% endblock %}
+            </div>
+            <div class="container hidden-sm hidden-xs">
+                <footer class="text-muted">
+                    <p>&copy; Canvass: <a href="//github.com/fedora-infra/canvass">sources</a>. Copyright 2015 <a href="//cydrobolt.com">Chaoyi Zha</a>
+                </footer>
+            </div>
+        </div>
+        {% endif %}
+    </body>
+</html>

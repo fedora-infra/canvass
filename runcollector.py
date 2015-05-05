@@ -14,7 +14,7 @@
 # Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 #
 
-from canvass import app
-import canvass.config
+from canvass_collector import app
+import canvass_collector.config
 
-app.run(debug=canvass.config.enable_debug , port=canvass.config.app_port, host=canvass.config.app_host)
+app.run(debug=canvass_collector.config.enable_debug , port=canvass_collector.config.app_port, host=canvass_collector.config.app_host)
