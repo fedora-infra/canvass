@@ -21,7 +21,7 @@ __version__ = "0.0.0"
 
 user_sessions = dict()
 
-app = Flask("canvass")
+app = Flask("canvass_collector")
 app.secret_key = ''.join(random.SystemRandom().choice(string.uppercase + string.digits) for _ in xrange(20))
 
 @app.route('/', methods=['GET'])
