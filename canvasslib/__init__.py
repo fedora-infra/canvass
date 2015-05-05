@@ -19,24 +19,22 @@ Canvass Python Library
 '''
 from __future__ import print_function
 import platform, glob, re, os, urllib, urllib2
-import json, sysinfo
+import json, sysinfo, config
 from collections import OrderedDict
 
 def get_sysinfo():
-    print( sysinfo.get_info() )
+    return sysinfo.get_info()
 
 def submit_sysinfo():
     pass
 
-get_sysinfo()
-
-
+print( get_sysinfo() )
 
 
 # Config
 
-data_send_endpoint = "http://localhost:5000/api/submit_record"
-geo_ip_endpoint = "https://geoip.fedoraproject.org/city"
+data_send_endpoint = config.data_send_endpoint
+geo_ip_endpoint = config.geo_ip_endpoint
 
 # System Info
 try:
@@ -111,20 +109,7 @@ try:
         total_storage += sto_device['size']
 except:
     print("Error gathering storage information")
-'''
-print(
-    total_storage,
-    total_memory,
-    linux_distro,
-    linux_distro_version,
-    linux_distro_name,
-    cpus,
-    machine_arch,
-    processor_arch,
-    num_cpus,
-    kernel_release
-)
-'''
+
 try:
     response_geoip = urllib2.urlopen(geo_ip_endpoint).read()
     geoip_object = json.loads(response_geoip)
